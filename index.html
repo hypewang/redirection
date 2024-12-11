@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown Timer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .timer {
+            font-size: 3em;
+            color: #333;
+        }
+        .message {
+            font-size: 1.5em;
+            color: green;
+            margin-top: 20px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Test Page</h1>
+    <div class="timer" id="timer">10</div>
+    <div class="message" id="message">InAppBrowser Close!</div>
+
+    <script>
+        // Countdown timer settings
+        let countdownTime = 10; // Countdown time in seconds
+        const timerElement = document.getElementById('timer');
+        const messageElement = document.getElementById('message');
+
+        // Function to start the countdown
+        function startCountdown() {
+            const interval = setInterval(() => {
+                // Update the timer display
+                countdownTime--;
+                timerElement.textContent = countdownTime;
+
+                // Check if the countdown has completed
+                if (countdownTime <= 0) {
+                    clearInterval(interval); // Stop the timer
+                    timerComplete(); // Trigger the callback function
+                }
+            }, 1000); // Update every second
+        }
+
+        // Callback function to execute when countdown completes
+        function timerComplete() {
+            timerElement.style.display = 'none'; // Hide the timer
+            messageElement.style.display = 'block'; // Show the message
+            window.location = "com.amazon.mobile.shopping.thirdpartynavigation://amazon.com/CloseInAppBrowser?targetUrl=https://www.amazon.com/dp/1234567890";
+        }
+
+        // Start the countdown when the page loads
+        window.onload = startCountdown;
+    </script>
+</body>
+</html>
